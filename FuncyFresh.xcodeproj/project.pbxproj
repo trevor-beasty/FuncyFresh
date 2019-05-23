@@ -13,6 +13,7 @@
 		E2B16A5F2296FA69007BB900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B16A5E2296FA69007BB900 /* Assets.xcassets */; };
 		E2B16A622296FA69007BB900 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B16A602296FA69007BB900 /* LaunchScreen.storyboard */; };
 		E2B16A6D2296FA6A007BB900 /* FuncyFreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B16A6C2296FA6A007BB900 /* FuncyFreshTests.swift */; };
+		E2B16A792296FA82007BB900 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B16A782296FA82007BB900 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		E2B16A682296FA6A007BB900 /* FuncyFreshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FuncyFreshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B16A6C2296FA6A007BB900 /* FuncyFreshTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncyFreshTests.swift; sourceTree = "<group>"; };
 		E2B16A6E2296FA6A007BB900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2B16A782296FA82007BB900 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		E2B16A562296FA67007BB900 /* FuncyFresh */ = {
 			isa = PBXGroup;
 			children = (
+				E2B16A772296FA72007BB900 /* Files */,
 				E2B16A572296FA67007BB900 /* AppDelegate.swift */,
 				E2B16A592296FA67007BB900 /* ViewController.swift */,
 				E2B16A5B2296FA67007BB900 /* Main.storyboard */,
@@ -94,6 +97,14 @@
 				E2B16A6E2296FA6A007BB900 /* Info.plist */,
 			);
 			path = FuncyFreshTests;
+			sourceTree = "<group>";
+		};
+		E2B16A772296FA72007BB900 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				E2B16A782296FA82007BB900 /* File.swift */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2B16A5A2296FA67007BB900 /* ViewController.swift in Sources */,
+				E2B16A792296FA82007BB900 /* File.swift in Sources */,
 				E2B16A582296FA67007BB900 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
