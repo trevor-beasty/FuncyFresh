@@ -45,6 +45,34 @@ func <> <A>(f: @escaping (A) -> A, g: @escaping (A) -> A) -> (A) -> A {
     return f >>> g
 }
 
+func curry<A, B, C>(f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+     return { a in
+        return { b in
+            f(a, b)
+        }
+    }
+}
+
+func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+    return { b in
+        return { a in
+            f(a)(b)
+        }
+    }
+}
+
+func zurry<A>(f: () -> A) -> A {
+    return f()
+}
+
+func map<A, B>(f: @escaping (A) -> B) -> ([A]) -> [B] {
+    return { $0.map(f) }
+}
+
+func filter<A>(f: @escaping (A) -> Bool) -> ([A]) -> [A] {
+    return { $0.filter(f) }
+}
+
 /////
 
 func incr(_ x: Int) -> Int {
