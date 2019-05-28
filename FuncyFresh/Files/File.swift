@@ -26,11 +26,22 @@ precedencegroup ForwardComposition {
 
 infix operator >>>: ForwardComposition
 
-func >>> <A, B, C>(f: @escaping (A) -> B, g: @escaping (B) -> C) -> (A) -> C {
+func >>> <A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
     
     return { a in
         g(f(a))
     }
+}
+
+precedencegroup BackwardsComposition {
+    associativity: left
+}
+
+infix operator <<<
+
+func <<< <A, B, C>(_ f: @escaping (B) -> C, _ g: @escaping (A) -> B) -> (A) -> C {
+    
+    return g >>> f
 }
 
 precedencegroup SingleTypeComposition {
@@ -61,16 +72,28 @@ func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
     }
 }
 
-func zurry<A>(f: () -> A) -> A {
+func zurry<A>(_ f: () -> A) -> A {
     return f()
 }
 
-func map<A, B>(f: @escaping (A) -> B) -> ([A]) -> [B] {
+func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
     return { $0.map(f) }
 }
 
 func filter<A>(f: @escaping (A) -> Bool) -> ([A]) -> [A] {
     return { $0.filter(f) }
+}
+
+func first<A, B, C>(_ f: @escaping (A) -> C) -> ((A, B)) -> (C, B) {
+    return { pair in
+        return (f(pair.0), pair.1)
+    }
+}
+
+func second<A, B, C>(_ f: @escaping (B) -> C) -> ((A, B)) -> (A, C) {
+    return { pair in
+        return (pair.0, f(pair.1))
+    }
 }
 
 /////
@@ -97,6 +120,8 @@ func greet(at date: Date) -> (String) -> String {
 
 let example: () -> Void = {
     
-    let x = incr >>> computeAndPrint
+    let nested = ((1, true), "Swift")
     
+    nested
+        |> (first <<< second) { !$0 }
 }
