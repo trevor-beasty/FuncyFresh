@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Class A Operators
+
 precedencegroup ForwardInvocation {
     associativity: left
     higherThan: ForwardApplication
@@ -58,6 +60,21 @@ func <& <A: AnyObject, B, C>(f: @escaping (A) -> (B,C) -> (), args: (B, C)) -> (
     }
 }
 
+// MARK: - Class B Operators
+
+precedencegroup Application {
+    associativity: left
+}
+
+infix operator !>: Application
+
+func !> <A: AnyObject>(a: A, f: (A) -> Void) -> A {
+    f(a)
+    return a
+}
+
+// MARK: - Arbitrary Class
+
 class Thing {
     var a: Int = 0
     var b: Int = 0
@@ -68,6 +85,8 @@ class Thing {
     }
     
 }
+
+// discardable result style functions
 
 extension Thing {
     
@@ -92,6 +111,8 @@ extension Thing {
     
 }
 
+// normal functions
+
 extension Thing {
     
     func foo_1(x: Int) {
@@ -109,12 +130,18 @@ extension Thing {
     
 }
 
+// MARK: - Equivalent Clients
+
+// discardable result style
+
 func makeThing_0() -> Thing {
     return Thing()
         .foo_0(x: 3)
         .bar_0(x: 7, y: 2)
         .baz_0()
 }
+
+// class A operators
 
 func makeThing_1() -> Thing {
     return Thing() >&>
@@ -123,16 +150,7 @@ func makeThing_1() -> Thing {
         <&> Thing.baz_1
 }
 
-precedencegroup Application {
-    associativity: left
-}
-
-infix operator !>: Application
-
-func !> <A: AnyObject>(a: A, f: (A) -> Void) -> A {
-    f(a)
-    return a
-}
+// class B operators
 
 func makeThing_2() -> Thing {
     return Thing()
