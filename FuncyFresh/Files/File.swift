@@ -56,6 +56,13 @@ func <> <A>(f: @escaping (A) -> A, g: @escaping (A) -> A) -> (A) -> A {
     return f >>> g
 }
 
+prefix operator ^
+
+prefix func ^<Root, Value>(_ kp: KeyPath<Root, Value>) -> (Root) -> Value {
+    
+    return get(kp)
+}
+
 func curry<A, B, C>(f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
      return { a in
         return { b in
@@ -96,6 +103,18 @@ func second<A, B, C>(_ f: @escaping (B) -> C) -> ((A, B)) -> (A, C) {
     }
 }
 
+func get<Root, Value>(_ kp: KeyPath<Root, Value>) -> (Root) -> Value {
+    
+    return { root in
+        return root[keyPath: kp]
+    }
+}
+
+func their<Root, Value, R>(_ f: @escaping (Root) -> Value, _ g: @escaping (Value, Value) -> R) -> (Root, Root) -> R {
+    
+    return { g(f($0), f($1)) }
+}
+
 /////
 
 func incr(_ x: Int) -> Int {
@@ -120,8 +139,17 @@ func greet(at date: Date) -> (String) -> String {
 
 let example: () -> Void = {
     
-    let nested = ((1, true), "Swift")
+    struct Thing {
+        let a: Int
+        let b: String
+    }
     
-    nested
-        |> (first <<< second) { !$0 }
+    let things = [
+        Thing.init(a: 0, b: "a"),
+        Thing.init(a: 1, b: "b")
+    ]
+    
+    things
+        .sorted(by: their(^\.a, >))
+    
 }
