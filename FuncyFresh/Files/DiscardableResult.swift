@@ -92,20 +92,19 @@ extension Thing {
     
     @discardableResult
     func foo_0(x: Int) -> Self {
-        a += (b + x)
+        foo_1(x: x)
         return self
     }
     
     @discardableResult
     func bar_0(x: Int, y: Int) -> Self {
-        a -= (y * y)
-        b += (a * x)
+        bar_1(x: x, y: y)
         return self
     }
     
     @discardableResult
     func baz_0() -> Self {
-        a *= b
+        baz_1()
         return self
     }
     
