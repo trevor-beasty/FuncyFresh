@@ -157,3 +157,11 @@ func makeThing_2() -> Thing {
         !> { $0.bar_1(x: 7, y: 2) }
         !> { $0.baz_1() }
 }
+
+func makeThing_3() -> Thing {
+    return Thing() !> {
+        $0.foo_1(x: 3)
+        $0.bar_1(x: 7, y: 2)
+        $0.baz_1()
+    }
+}
